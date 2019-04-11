@@ -1,0 +1,158 @@
+$break: $break-medium
+
+.container--100
+  width: 100%
+  margin: auto
+  padding: 15px 0
+  box-sizing: border-box
+
+@for $i from 4 through 9
+  .container--#{$i}0
+    width: #{$i}0%
+    margin: auto
+    padding: 15px 0
+    box-sizing: border-box
+
+@for $i from 1 through 12 
+  .grid-#{$i}
+    display: grid
+    grid-template-columns: repeat(#{$i}, 1fr)
+    row-gap: 2rem
+
+  .grid-sm-#{$i}.grid-sm-#{$i}
+    @media (max-width: $break)
+      display: grid
+      grid-template-columns: repeat(#{$i}, 1fr)
+      row-gap: 2rem
+
+@for $i from 1 through 12
+  .col-#{$i}
+    grid-column: span $i
+
+  .col-sm-#{$i}.col-sm-#{$i}
+    @media (max-width: $break)
+      grid-column: span $i
+
+@for $i from 0 through 50
+  .col-gap-#{$i}
+    column-gap: #{$i}px !important
+
+  .row-gap-#{$i}
+    row-gap: #{$i}px !important
+
+  .gap-#{$i}
+    row-gap: #{$i}px !important
+    column-gap: #{$i}px !important
+
+@for $i from 1 through 3
+  .masonic--col-#{$i}
+    column-count: $i
+
+.masonic
+  > div
+    margin-bottom: 15px
+    -webkit-column-break-inside: avoid
+    page-break-inside: avoid
+    break-inside: avoid
+
+@keyframes fade-in-animation
+  from
+    opacity: 0
+    translate: 0,-2em
+
+  to
+    opacity: 1
+    translate: 0,0
+
+
+.fade-in
+  opacity: 0
+  animation: fade-in-animation 0.75s $bezier-curve forwards
+
+@for $i from 1 through 10
+  .fade-in-list > .fade-in:nth-child(#{$i})
+    animation-delay: $i * 0.1s !important
+
+
+.flex--col
+  display: flex
+  flex-direction: column
+
+.flex--row
+  display: flex
+  flex-direction: row
+  flex-wrap: wrap
+
+.flex--centered
+  align-items: center
+  vertical-align: middle
+
+.flex--justify-center
+  justify-content: center
+
+.flex--justify-end
+  justify-content: flex-end
+
+.flex--align-center
+  align-items: center
+
+.flex--between
+  justify-content: space-between
+
+.shadow--spec
+  box-shadow: $shadow-spec !important
+
+.shadow--1
+  box-shadow: $shadow-1 !important
+
+.shadow--high
+  box-shadow: $shadow-high !important
+
+.content
+  box-sizing: border-box
+  margin-top: 3vmax
+
+.clickable
+  cursor: pointer
+
+.no--padding
+  padding: 0 !important
+
+.no--margin
+  margin: 0 !important
+
+.sm--hidden
+  @media (max-width: $break)
+    display: none
+
+.bg--hidden
+  @media (min-width: $break)
+    display: none
+
+.shrunk
+  max-height: 0 !important
+  padding: 0 !important
+  margin: 0 !important
+  overflow: hidden !important
+
+img.thumb-nail
+  height: 2rem
+  margin: 0 0.5em 0 0
+
+  @media (max-width: $break)
+    height: 3rem
+
+.progress-bar
+  background: repeating-linear-gradient(to right, #EE7752 0%, #E73C7E 25%, #23A6D5 50%, #23D5AB 75%, #EE7752 100%)
+  background-size: 200% auto
+  background-position: 0 100%
+  animation: progress__bar-animation 2s infinite
+  animation-fill-mode: forwards
+  animation-timing-function: linear
+  height: 5px
+  
+@keyframes progress__bar-animation
+  0%   
+    background-position: 0 0
+  100%
+    background-position: -200% 0

@@ -1,0 +1,54 @@
+@import 'variables'
+
+.t--size-h1
+  font-size: $h1
+.t--size-h2
+  font-size: $h2
+.t--size-h3
+  font-size: $h3
+.t--size-h4
+  font-size: $h4
+.t--size-h5
+  font-size: $h5
+.t--size-b1
+  font-size: $body-1
+.t--size-b2
+  font-size: $body-2
+.t--size-b3
+  font-size: $body-3
+.t--size-b4
+  font-size: $body-4
+
+.t--align-l
+  text-align: left
+.t--align-r
+  text-align: right
+.t--align-c
+  text-align: center
+
+.t--white
+  color: white !important
+.t--gray
+  color: $gray !important
+.t--grayish
+  color: $grayish !important
+.t--black
+  color: $black !important
+.t--red
+  color: $red !important
+.t--blue
+  color: $blue !important
+.t--purple
+  color: $purple !important
+
+.t--strong
+  color: var(--strong)
+  font-weight: 600
+
+.t--weak
+  color: var(--weak)
+  font-weight: 200
+
+@for $i from 1 through 10
+  .t--#{$i}00
+    font-weight: calc(#{$i} * 100)

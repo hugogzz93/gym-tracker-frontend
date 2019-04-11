@@ -1,0 +1,223 @@
+$light-red: #F55D8D;
+$dark-red: #56365F;
+$dark-blue: #2A3760;
+$light-blue: #33C2C0;
+$border: #AFB3B4;
+$white: #EBEBEC;
+
+.dash-row {
+  display: flex;
+}
+
+.dashboard {
+  opacity: 0.9;
+}
+
+.widget {
+  min-height: 150px;
+  background-color: $dark-blue;
+  color: $white;
+  background-image: -o-radial-gradient(45% center, circle, rgba(39, 52, 99,0.9) 40%, rgba(139,66,86,0.9));
+  background-image: -ms-radial-gradient(45% center, circle, rgba(39, 52, 99,0.9) 40%, rgba(139,66,86,0.9));
+  background-image: -moz-radial-gradient(45% center, circle, rgba(39, 52, 99,0.9) 40%, rgba(139,66,86,0.9));
+  background-image: -webkit-radial-gradient(45% center, circle, rgba(39, 52, 99,0.9) 40%, rgba(139,66,86,0.9));
+  background-image: radial-gradient(45% center, circle, rgba(39, 52, 99,0.9) 40%, rgba(139,66,86,0.9));
+  background-image: radial-gradient(circle at 45% center, rgba(39, 52, 99, 0.9) 40%, rgba(139, 66, 86, 0.9));
+  background-attachment: fixed;
+  
+  &:not(:first-child), &:not(:last-child) {
+    border-left: 1px solid lighten($dark-blue, 12%);
+    border-bottom: 1px solid lighten($dark-blue, 12%);
+  }
+    
+
+  &.light {
+    background-color: $light-blue;
+    color: $dark-blue;
+    border-color: #21AEB9;
+    
+    background-image: -o-radial-gradient(45% center, circle, rgba(39, 184, 196,0.9) 40%, rgba(178,194,140,0.9));
+    background-image: -ms-radial-gradient(45% center, circle, rgba(39, 184, 196,0.9) 40%, rgba(178,194,140,0.9));
+    background-image: -moz-radial-gradient(45% center, circle, rgba(39, 184, 196,0.9) 40%, rgba(178,194,140,0.9));
+    background-image: -webkit-radial-gradient(45% center, circle, rgba(39, 184, 196,0.9) 40%, rgba(178,194,140,0.9));
+    background-image: radial-gradient(45% center, circle, rgba(39, 184, 196,0.9) 40%, rgba(178,194,140,0.9));
+    background-image: radial-gradient(circle at 45% center, rgba(39, 184, 196, 0.9) 40%, rgba(178, 194, 140, 0.9));
+
+    &:not(:first-child), &:not(:last-child) {
+      border-left: 1px solid #21AEB9;
+      border-bottom: 1px solid #21AEB9;
+    }
+
+  }
+  
+}  
+.content {
+  padding-top: 1em;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: 200;
+
+  .content-suffix, .content-sub-text {
+    opacity: 0.5;
+  } 
+
+  .content-sub-text {
+    font-weight: 300;
+    font-size: 12px;
+    opacity: 0.8;
+  }
+  .content-main-text {
+    opacity: 0.8;
+    & > .fa {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .content-prefix {
+      font-size: 1rem;
+      position: relative;
+      bottom: 0.6rem;
+      right: 0.5rem;
+    }
+    .content-accent {
+      // font-size: 2.6rem;
+      font-size: 2rem;
+
+      margin: 5px;
+    }
+    
+    .content-suffix {
+      // font-size: 1.6rem;
+      font-size: 1.25rem;
+    }
+
+  }
+  .content-sub-graph {
+    width: 100%;
+    min-height: 3rem;
+    // padding: 1rem 0;
+
+  }
+
+  .content-sub-icon {
+      width: 100%;
+      min-height: 3rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2rem;
+  }
+
+  .content-sub-icon, .content-sub-graph {
+    margin: 1rem 0;
+  }
+
+  &.long-bar {
+    display: flex;
+    flex-direction: row;
+
+    .content-info {
+      flex-grow: 1;
+    }
+
+    .content-chart {
+      height: 100%;
+      flex-grow: 7;
+      width:0;
+    }
+  }
+
+  .content-main-graph {
+    min-height: 8rem;
+    min-width: 8rem;
+  }
+}
+
+.axis {
+  .domain {
+    display: none;
+  }
+
+  .tick line {
+    display: none;
+  }
+
+  text {
+    font-size: 17px;
+    transform: scaleX(1.2);
+    opacity: 0.3;
+  }
+}
+
+
+.content-main-graph {
+  svg {
+    overflow: visible !important;
+  }
+}
+
+.widget {
+  &.dark {
+    .content {
+      .content-main-text {
+        & > .fa {
+          color: $light-red;
+        }
+      }
+    }
+  }
+  &.light {
+    text {
+      fill: $dark-blue !important;
+      display: none;
+    }
+
+    &.alt {
+      text {
+        display: inherit;
+      }
+      i {
+        display: none;
+      }
+    }
+    &:hover {
+      text {
+        display: inherit;
+      }
+
+      i {
+        display: none;
+      }
+
+    }
+
+
+    .complete-circle {
+      position: absolute;
+      left: 46%;
+      top: 32%;
+      font-size: 1.2em;
+    }
+    .content {
+      color: $dark-blue;
+
+      .content-sub-text {
+        font-weight: 400;
+      }
+
+      .axis {
+        text {
+          color: $dark-blue;
+        }
+      }
+    }
+  }
+}
+
+.percent-btn {
+  cursor: pointer;
+}

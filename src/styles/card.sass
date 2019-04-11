@@ -1,0 +1,65 @@
+@import './mixins'
+  
+%__card-bg
+  --shad-1: rgba(0,0,0,0.12)
+  --shad-2: rgba(0,0,0,0.24)
+  @include shad_1(var(--shad-1), var(--shad-2))
+  color: #345
+
+%__card
+  @extend %__card-bg
+  border-radius: 2px
+  padding: var(--padding)
+  box-sizing: border-box
+  transition: all $tempo $bezier-curve
+
+.card
+  @extend %__card
+  --bg-col: #fff
+  --color: var(--strong)
+  --padding: 1em
+  background: var(--bg-col)
+  color: var(--color)
+  overflow: hidden
+
+  &:not(:last-child)
+    margin-bottom: 0.75em
+
+.card--no-padding
+  padding: 0
+
+.card--no-bg
+  @extend .card
+  background: transparent
+  box-shadow: none
+
+.card--clickable
+  cursor: pointer
+  position: relative
+  z-index: 1
+
+  &:hover
+    z-index: 2
+    --shad-h-1: rgba(0,0,0,0.12)
+    --shad-h-2: rgba(0,0,0,0.24)
+    @include shad_2(var(--shad-h-1), var(--shad-h-2))
+
+.card--info-red
+  background: $redGradient
+  --color: white
+
+.card--highlight.card--highlight
+  --strong: white
+  --weak: $gray
+  --shad-1: #ff8465
+  --shad-2: #ff8465
+  background: $orangeGradient
+  border: 1px solid #0003
+
+.modal__container
+  position: fixed
+  z-index: 3
+  top: 70px
+  right: 70px
+
+
