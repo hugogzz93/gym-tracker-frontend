@@ -1,9 +1,21 @@
 import React, { useState, useEffect, useReducer } from "react";
+import gql from "graphql-tag";
 import TextInput from "./Inputs/textInput";
 import Api from "../lib/services/api";
 import { staticDebounce } from "../lib/debounce";
+import { Mutation } from "react-apollo";
 import mergeByKey from "array-merge-by-key";
 import Selectize from "react-select";
+
+const ADD_INTAKE = gql`
+  mutation addIntake($input: IntakeInput!) {
+    intake {
+      create(input: $input) {
+        id
+      }
+    }
+  }
+`;
 
 function reducer(state, action) {
   switch (action.type) {
@@ -52,7 +64,32 @@ const FoodInput = (props: {
       value={props.value}
       onChange={props.onChange}
       name={props.name}
+      label='grams'
     />
+    <Mutation mutation={ADD_INTAKE}>
+      {(addIntake, { loading, error }) => (
+      <React.Fragment>
+        <button
+          className="btn"
+          onClick={e => {
+            e.preventDefault();
+            addIntake({
+              variables: {
+                input: {
+                  ndbid: props.id,
+                  grams: parseInt(props.value),
+                  userId: 1
+                }
+              }
+            });
+        }}>
+          Submit
+        </button>
+        {loading && <span>Loading</span>}
+        {error && <span>Error</span>}
+      </React.Fragment>
+      )}
+    </Mutation>
   </div>
 );
 
