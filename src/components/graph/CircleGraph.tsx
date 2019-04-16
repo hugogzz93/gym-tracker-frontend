@@ -6,6 +6,7 @@ export interface Props {
   main: string;
   subtext: string;
   col: number;
+  percent?: number;
 }
 
 class CircleGraph extends Component<Props> {
@@ -18,7 +19,7 @@ class CircleGraph extends Component<Props> {
   componentDidMount() {
     const circleGraph = new CircleChart();
     const graphContainer = this.refs.graphContainer;
-    const percent = 0.85;
+    const percent = this.props.percent || 0.85;
     circleGraph.generate(graphContainer, percent, this.health(percent));
   }
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useReducer } from "react";
-import gql from "graphql-tag";
+import gql from "graphql-tag.macro";
 import TextInput from "./Inputs/textInput";
 import Api from "../lib/services/api";
 import { staticDebounce } from "../lib/debounce";

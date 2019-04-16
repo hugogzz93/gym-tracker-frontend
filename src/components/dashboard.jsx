@@ -42,8 +42,8 @@ class Dashboard extends Component {
      ]
 
      const CircleGraphs = [
-       {col: 3, main: 'Protein', subtext: ''},
-       {col: 3, main: 'Calories', subtext: ''},
+       {col: 3, main: 'Protein', subtext: '' },
+       {col: 3, main: 'Calories', subtext: '', percent: parseFloat((this.props.data.find(e => e.nutrientId == '208').value / 3200).toFixed(2) )},
        {col: 2, main: 'Mg', subtext: 'STRENGHT'},
        {col: 2, main: 'Zn', subtext: 'MUSCLES'},
        {col: 2, main: 'H20', subtext: 'GENERAL'},
