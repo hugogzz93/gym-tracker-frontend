@@ -6,7 +6,7 @@ import { staticDebounce } from "../lib/debounce";
 import { Mutation } from "react-apollo";
 import mergeByKey from "array-merge-by-key";
 import Selectize from "react-select";
-import { SessionContext } from '../App'
+import { SessionContext } from "../App";
 
 const ADD_INTAKE = gql`
   mutation addIntake($input: IntakeInput!) {
@@ -41,7 +41,7 @@ const CREATE_INTAKES = gql`
 function reducer(state, action) {
   switch (action.type) {
     case "reset": {
-      return {...state, options: [], selection: []}
+      return { ...state, options: [], selection: [] };
     }
     case "setOptions": {
       return { ...state, options: action.payload };
@@ -132,11 +132,11 @@ const Form = (props: { active: boolean }) => {
 
       <Mutation
         mutation={CREATE_INTAKES}
-        onCompleted={() => dispatch({ type: "reset"})}
+        onCompleted={() => dispatch({ type: "reset" })}
       >
         {(createIntakes, { data, loading, error }) => {
-          if(error) return <div>Error</div>
-          if(loading) return <div>Loading</div>
+          if (error) return <div>Error</div>;
+          if (loading) return <div>Loading</div>;
           return (
             <div className="col-1">
               {state.selection.map(i => (
@@ -154,25 +154,25 @@ const Form = (props: { active: boolean }) => {
                 />
               ))}
               <SessionContext.Consumer>
-                  {({userId}) => (
-                    <div
-                      className="button"
-                      onClick={() =>
-                        createIntakes({
-                          variables: {
-                            inputs: state.selection.map(i => ({
-                              userId,
-                              ndbid: i.id,
-                              grams: parseInt(i.grams),
-                              name: i.name
-                            }))
-                          }
-                        })
-                      }
-                    >
-                      Submit
-                    </div>
-                  )}
+                {({ userId }) => (
+                  <div
+                    className="button"
+                    onClick={() =>
+                      createIntakes({
+                        variables: {
+                          inputs: state.selection.map(i => ({
+                            userId,
+                            ndbid: i.id,
+                            grams: parseInt(i.grams),
+                            name: i.name
+                          }))
+                        }
+                      })
+                    }
+                  >
+                    Submit
+                  </div>
+                )}
               </SessionContext.Consumer>
             </div>
           );
