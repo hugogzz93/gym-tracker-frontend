@@ -1,0 +1,69 @@
+@import 'variables'
+
+$top-padding: 23px
+$side-padding: 10px
+
+.form__control
+  input.form__input, textarea.form__input
+    font-size: $font-size
+    background: transparent
+    color: $black
+    border-radius: 5px
+    padding: $top-padding $side-padding $side-padding
+    cursor: pointer
+    background: white
+    box-shadow: 0 3px 18px -4px #0005
+    outline: none
+    box-sizing: border-box
+    border: 1px solid transparent
+    width: 100%
+
+    &:focus
+      border-color: $blue
+
+  textarea.form__input
+    font-size: 16px
+    padding: 21px 12px 15px
+    min-width: 99%
+    line-height: 20px
+    resize: none
+
+  label
+    position: absolute
+    pointer-events: none
+    left: $side-padding
+    top: $top-padding
+
+  .form__input:focus ~ label,
+  .form__input:not(:placeholder-shown) ~ label
+    top: 3px
+    font-size: 13px
+
+.form__control
+  position: relative
+
+.form__control--invalid
+  .form__input.form__input
+    border-color: $g__red
+
+.form__errors
+  font-size: 12px
+  margin: auto
+  color: $g__red
+  position: relative
+  top: .5em
+
+input[type=number].in__small-num
+  text-align: center
+  color: inherit
+  font-size: inherit
+  width: 3em
+  outline: none
+  padding: 0.2ch
+
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button
+    -webkit-appearance: none
+    margin: 0
+
+

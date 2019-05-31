@@ -1,0 +1,21 @@
+#intakeForm
+  @extend .card
+  z-index: 1
+  opacity: 0
+  border: 1px solid 
+  max-width: 0
+  max-height: 0
+  position: fixed
+  top: 0em
+  left: 1em
+  transition: all $tempo
+  border-radius: 1em
+
+  &.active
+    opacity: 1
+    top: 1em
+    max-height: 100em
+    max-width: 100em
+    min-width: 50vw
+
+

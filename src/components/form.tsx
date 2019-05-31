@@ -6,6 +6,7 @@ import { staticDebounce } from "../lib/debounce";
 import { Mutation } from "react-apollo";
 import mergeByKey from "array-merge-by-key";
 import Selectize from "react-select";
+import { SessionContext } from '../App'
 
 const ADD_INTAKE = gql`
   mutation addIntake($input: IntakeInput!) {
@@ -17,8 +18,31 @@ const ADD_INTAKE = gql`
   }
 `;
 
+const ADD_NUTRIENT = gql`
+  mutation addNutrient($input: NutrientIntakeInput!) {
+    nutrientIntake {
+      create(input: $input) {
+        value
+      }
+    }
+  }
+`;
+
+const CREATE_INTAKES = gql`
+  mutation createIntakes($inputs: [IntakeInput!]!) {
+    intake {
+      batchCreate(inputs: $inputs) {
+        id
+      }
+    }
+  }
+`;
+
 function reducer(state, action) {
   switch (action.type) {
+    case "reset": {
+      return {...state, options: [], selection: []}
+    }
     case "setOptions": {
       return { ...state, options: action.payload };
     }
@@ -44,6 +68,18 @@ function reducer(state, action) {
         )
       };
     }
+    case "updateCalorie": {
+      return {
+        ...state,
+        calories: action.payload
+      };
+    }
+    case "updateProtein": {
+      return {
+        ...state,
+        protein: action.payload
+      };
+    }
   }
 }
 
@@ -58,43 +94,21 @@ const FoodInput = (props: {
   value: string;
   onChange: (any) => any;
 }) => (
-  <div className="flex--row">
-    <div className="t--size-b3">{props.name}</div>
-    <TextInput
-      value={props.value}
-      onChange={props.onChange}
-      name={props.name}
-      label='grams'
-    />
-    <Mutation mutation={ADD_INTAKE}>
-      {(addIntake, { loading, error }) => (
-      <React.Fragment>
-        <button
-          className="btn"
-          onClick={e => {
-            e.preventDefault();
-            addIntake({
-              variables: {
-                input: {
-                  ndbid: props.id,
-                  grams: parseInt(props.value),
-                  userId: 1
-                }
-              }
-            });
-        }}>
-          Submit
-        </button>
-        {loading && <span>Loading</span>}
-        {error && <span>Error</span>}
-      </React.Fragment>
-      )}
-    </Mutation>
-  </div>
+  <TextInput
+    value={props.value}
+    onChange={props.onChange}
+    name={props.name}
+    label={props.name}
+  />
 );
 
-const Form = () => {
-  const [state, dispatch] = useReducer(reducer, { selection: [], options: [] });
+const Form = (props: { active: boolean }) => {
+  const [state, dispatch] = useReducer(reducer, {
+    selection: [],
+    options: [],
+    calories: 0,
+    protein: 0
+  });
   const [search, setSearch] = useState("");
 
   useEffect(() => {
@@ -102,7 +116,7 @@ const Form = () => {
   }, [search]);
 
   return (
-    <form className="grid-1">
+    <form id="intakeForm" className={`grid-1 ${props.active ? "active" : ""}`}>
       <div className="col-1">
         <Selectize
           value={null}
@@ -116,21 +130,116 @@ const Form = () => {
         />
       </div>
 
+      <Mutation
+        mutation={CREATE_INTAKES}
+        onCompleted={() => dispatch({ type: "reset"})}
+      >
+        {(createIntakes, { data, loading, error }) => {
+          if(error) return <div>Error</div>
+          if(loading) return <div>Loading</div>
+          return (
+            <div className="col-1">
+              {state.selection.map(i => (
+                <TextInput
+                  key={i.id}
+                  name={i.name}
+                  value={i.grams}
+                  label={i.name}
+                  onChange={e =>
+                    dispatch({
+                      type: "updateSelected",
+                      payload: { id: i.id, grams: e.target.value }
+                    })
+                  }
+                />
+              ))}
+              <SessionContext.Consumer>
+                  {({userId}) => (
+                    <div
+                      className="button"
+                      onClick={() =>
+                        createIntakes({
+                          variables: {
+                            inputs: state.selection.map(i => ({
+                              userId,
+                              ndbid: i.id,
+                              grams: parseInt(i.grams),
+                              name: i.name
+                            }))
+                          }
+                        })
+                      }
+                    >
+                      Submit
+                    </div>
+                  )}
+              </SessionContext.Consumer>
+            </div>
+          );
+        }}
+      </Mutation>
       <div className="col-1">
-        {state.selection.map(i => (
-          <FoodInput
-            key={i.id}
-            id={i.id}
-            name={i.name}
-            value={i.grams}
-            onChange={e =>
-              dispatch({
-                type: "updateSelected",
-                payload: { id: i.id, grams: e.target.value }
-              })
-            }
-          />
-        ))}
+        <Mutation mutation={ADD_NUTRIENT}>
+          {(addNutrient, { loading, error }) => (
+            <React.Fragment>
+              <TextInput
+                value={state.calories}
+                onChange={e =>
+                  dispatch({ type: "updateCalories", payload: e.target.value })
+                }
+                name="calories"
+                label="Add Calories"
+              />
+              <button
+                onClick={e => {
+                  e.preventDefault();
+                  addNutrient({
+                    variables: {
+                      input: {
+                        nutrientId: "208",
+                        value: parseFloat(state.calories)
+                      }
+                    }
+                  });
+                }}
+              >
+                Submit
+              </button>
+            </React.Fragment>
+          )}
+        </Mutation>
+        <Mutation mutation={ADD_NUTRIENT}>
+          {(addNutrient, { loading, error }) => (
+            <React.Fragment>
+              <TextInput
+                value={state.protein}
+                onChange={e =>
+                  dispatch({ type: "updateProtein", payload: e.target.value })
+                }
+                name="Protein"
+                label="Add Protein"
+              />
+              <button
+                onClick={e => {
+                  e.preventDefault();
+                  addNutrient({
+                    variables: {
+                      input: {
+                        nutrientId: "203",
+                        value: parseFloat(state.protein)
+                      }
+                    }
+                  });
+                  dispatch({ type: "updateProtein", payload: 0 });
+                }}
+              >
+                Submit
+              </button>
+              {loading && <span>Loading</span>}
+              {error && <span>Error</span>}
+            </React.Fragment>
+          )}
+        </Mutation>
       </div>
     </form>
   );

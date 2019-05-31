@@ -3,11 +3,11 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import { ApolloProvider } from 'react-apollo';
-import ApolloClient from './apolloClient';
+import { ApolloProvider } from "react-apollo";
+import ApolloClient from "./apolloClient";
 
 ReactDOM.render(
- <ApolloProvider client={ApolloClient}>
+  <ApolloProvider client={ApolloClient}>
     <App />
   </ApolloProvider>,
   document.getElementById("root") as HTMLElement
