@@ -19,7 +19,7 @@ class CircleGraph extends Component<Props> {
   componentDidMount() {
     const circleGraph = new CircleChart();
     const graphContainer = this.refs.graphContainer;
-    const percent = this.props.percent || 0.85;
+    const percent = this.props.percent || 0
     circleGraph.generate(graphContainer, percent, this.health(percent));
   }
 

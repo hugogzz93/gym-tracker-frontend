@@ -15,7 +15,7 @@ export default {
       query: foodName,
       dataSource: "Standard Reference",
       format: "json",
-      max: 10
+      max: 75
     });
   },
 

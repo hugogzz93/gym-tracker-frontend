@@ -7,6 +7,7 @@ export interface Props {
   subtext: string;
   suffix: string;
   image: string;
+  data?: Array<number>;
 }
 
 class LineGraph extends Component<Props> {
@@ -20,16 +21,18 @@ class LineGraph extends Component<Props> {
   componentDidMount() {
     const lineChart = new LineChart();
     const graphContainer = this.refs.graphContainer;
-    lineChart.generate(graphContainer, [0, 4, 2, 1], this.health(0.85));
+    const data = this.props.data || [0, 4, 2, 1]
+    lineChart.generate(graphContainer, data, this.health(data[data.length - 1]));
   }
 
   render() {
     return (
       <div className="content content-number">
-        <div className="content-main-text">
+        <div className="content-main-text flex--row flex--align-center">
           <span className="content-prefix">
             <i className={this.props.image} aria-hidden="true" />
           </span>
+          <div className="content-accent">{this.props.main}</div>
           <span className="content-suffix">{this.props.suffix}</span>
         </div>
         <div className="content-sub-text">{this.props.subtext}</div>

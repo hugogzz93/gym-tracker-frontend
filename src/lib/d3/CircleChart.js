@@ -72,7 +72,7 @@ export default class CircleChart {
         .attr("aria-hidden", "true");
     } else if (percent > 1) {
       var newText = (percent * 100).toFixed(0) + "%";
-      elem
+      d3.select(elem)
         .append("i")
         .attr("class", "fa fa-check complete-circle")
         .attr("aria-hidden", "true");
