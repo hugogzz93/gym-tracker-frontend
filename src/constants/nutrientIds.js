@@ -1,0 +1,30 @@
+const Nutrients = {
+    Water: {nutrientId: "255", unit: "g"},
+    Energy: {name:  "Energy", nutrientId: "208", unit: "kcal"},
+    Protein: {name:  "Protein", nutrientId: "203", unit: "g"},
+    Total: {name:  "Total lipid (fat)", nutrientId: "204", unit: "g"},
+    Carbohydrate: {name:  "Carbohydrate, by difference", nutrientId: "205", unit: "g"},
+    Calcium: {name:  "Calcium, Ca", nutrientId: "301", unit: "mg"},
+    Iron: {name:  "Iron, Fe", nutrientId: "303", unit: "mg"},
+    Magnesium: {name:  "Magnesium, Mg", nutrientId: "304", unit: "mg"},
+    Phosphorus: {name:  "Phosphorus, P", nutrientId: "305", unit: "mg"},
+    Potassium: {name:  "Potassium, K", nutrientId: "306", unit: "mg"},
+    Sodium: {name:  "Sodium, Na", nutrientId: "307", unit: "mg"},
+    Zinc: {name:  "Zinc, Zn", nutrientId: "309", unit: "mg"},
+    VitaminC: {name:  "Vitamin C, total ascorbic acid", nutrientId: "401", unit: "mg"},
+    Thiamin: {name:  "Thiamin", nutrientId: "404", unit: "mg"},
+    Riboflavin: {name:  "Riboflavin", nutrientId: "405", unit: "mg"},
+    Niacin: {name:  "Niacin", nutrientId: "406", unit: "mg"},
+    VitaminB6: {name:  "Vitamin B-6", nutrientId: "415", unit: "mg"},
+    Folate: {name:  "Folate, DFE", nutrientId: "435", unit: "µg"},
+    VitaminB12: {name:  "Vitamin B-12", nutrientId: "418", unit: "µg"},
+    VitaminA_RAE: {name:  "Vitamin A, RAE", nutrientId: "320", unit: "µg"},
+    VitaminA_IU: {name:  "Vitamin A, IU", nutrientId: "318", unit: "IU"},
+    SaturatedFat: {name:  "Fatty acids, total saturated", nutrientId: "606", unit: "g"},
+    MonosaturatedFat: {name:  "Fatty acids, total monounsaturated", nutrientId: "645", unit: "g"},
+    PolyunsaturatedFat: {name:  "Fatty acids, total polyunsaturated", nutrientId: "646", unit: "g"},
+    Cholesterol: {name:  "Cholesterol", nutrientId: "601", unit: "mg"},
+    VitaminE: {name:  "Vitamin E (alpha-tocopherol", nutrientId: "323", unit: "mg"}
+}
+
+export default Nutrients;

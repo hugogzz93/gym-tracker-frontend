@@ -49,7 +49,21 @@ $white: #EBEBEC;
     }
 
   }
-  
+
+  .widget__toolbar {
+    i {
+      opacity: 0;
+    }
+  }
+
+  &:hover {
+    .widget__toolbar {
+      i {
+        opacity: 1;
+      }
+    }
+  }
+
 }  
 .content {
   padding-top: 1em;
@@ -134,6 +148,49 @@ $white: #EBEBEC;
   .content-main-graph {
     min-height: 8rem;
     min-width: 8rem;
+  }
+
+}
+
+.nutrient-widget {
+  form {
+    opacity: 0.5;
+    color: $white;
+    padding: 1em;
+  }
+  label {
+    color: #345;
+  }
+  input {
+    background: transparent;
+    border: 1px solid $white;
+    color: $white;
+    border-radius: 5%;
+    padding: 0.5em;
+    font-size: 15px;
+    margin: 0 0 0.5em 0;
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .button {
+    border: 1px solid $white;
+    padding: 0.5em;
+    border-radius: 5%;
+    cursor: pointer;
+    transition: all 0.3s;
+    background: transparent;
+    &:hover {
+      background: #fff2;
+    }
+    &:active {
+      background: $white;
+      color: black;
+    }
+  }
+  .content {
+      margin: 0;
   }
 }
 

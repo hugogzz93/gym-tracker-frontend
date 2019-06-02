@@ -19,6 +19,10 @@ const GET_CONSUMPTION = gql`
         unit
         value
       }
+      nutrientIntakeGoals {
+        nutrientId
+        value
+      }
     }
   }
 `;
@@ -49,7 +53,7 @@ const App = () => {
             {({ data, loading, error }) => {
               if (loading) return <span>loading</span>;
               if (error) return <span>error</span>;
-              return <Dashboard data={data.users[0].totalIntake} />;
+              return <Dashboard data={data.users[0]} />;
             }}
           </Query>
         </div>

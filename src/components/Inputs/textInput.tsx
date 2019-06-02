@@ -1,12 +1,12 @@
 import React from "react";
 
 export interface Props {
-  type?: string;
-  value: string;
+  value: string | number;
   onChange: (_: any) => any;
+  name: string;
+  type?: string;
   className?: string;
   errors?: object;
-  name: string;
   label?: string;
 }
 

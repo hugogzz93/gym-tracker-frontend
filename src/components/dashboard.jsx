@@ -6,17 +6,16 @@ import LongGraph from "./graph/LongGraph";
 import Number from "./graph/Number";
 import Picture from "./graph/Picture";
 import Widget from "./graph/Widget";
+import NutrientWidget from "./NutrientWidget.tsx";
+import Nutrients from '../constants/nutrientIds'
 
 class Dashboard extends Component {
   constructor(props) {
     super(props);
-    this.getPercent = this.getPercent.bind(this);
-  }
-
-  getPercent(id, target) {
-    const nutrient = this.props.data.find(e => e.nutrientId == id);
-    const value = nutrient ? nutrient.value : 0;
-    return parseFloat((value / target).toFixed(2));
+    this.goals = {}
+    this.props.data.nutrientIntakeGoals.forEach(e => this.goals[e.nutrientId] = e)
+    this.intakes = {}
+    this.props.data.totalIntake.forEach(e => this.intakes[e.nutrientId] = e)
   }
 
   render() {
@@ -54,7 +53,6 @@ class Dashboard extends Component {
         image: "fa fa-thermometer-empty",
         main: "48",
         suffix: "%",
-        subtext: "MUSCLE PERCENTAGE",
         data: getSequence(4, 40, 80)
       },
       {
@@ -62,7 +60,6 @@ class Dashboard extends Component {
         image: "fa fa-heartbeat",
         main: "78",
         suffix: "%",
-        subtext: "WATER PERCENTAGE",
         data: getSequence(4, 40, 80)
       },
       {
@@ -78,7 +75,6 @@ class Dashboard extends Component {
         image: "fa fa-user",
         main: "16",
         suffix: "%",
-        subtext: "FAT PERCENTAGE",
         data: getSequence(4, 40, 80)
       },
       {
@@ -104,121 +100,161 @@ class Dashboard extends Component {
         col: 3,
         main: "Protein",
         subtext: "",
-        percent: this.getPercent("203", 75)
+        nutrient: Nutrients.Protein,
+        goal: this.goals[Nutrients.Protein.nutrientId].value,
+        intake: this.intakes[Nutrients.Protein.nutrientId].value,
       },
       {
         col: 3,
         main: "Calories",
         subtext: "",
-        percent: this.getPercent("208", 3200)
+        nutrient: Nutrients.Energy,
+        goal: this.goals[Nutrients.Energy.nutrientId].value,
+        intake: this.intakes[Nutrients.Energy.nutrientId].value,
       },
       {
         col: 2,
         main: "Mg",
         subtext: "STRENGHT",
-        percent: Math.random(0, 100).toFixed(2)
+        nutrient: Nutrients.Magnesium,
+        goal: this.goals[Nutrients.Magnesium.nutrientId].value,
+        intake: this.intakes[Nutrients.Magnesium.nutrientId].value,
       },
       {
         col: 2,
         main: "Zn",
         subtext: "MUSCLES",
-        percent: Math.random(0, 100).toFixed(2)
+        nutrient: Nutrients.Zinc,
+        goal: this.goals[Nutrients.Zinc.nutrientId].value,
+        intake: this.intakes[Nutrients.Zinc.nutrientId].value,
       },
       {
         col: 2,
         main: "H20",
         subtext: "GENERAL",
-        percent: Math.random(0, 100).toFixed(2)
+        nutrient: Nutrients.Water,
+        goal: this.goals[Nutrients.Water.nutrientId].value,
+        intake: this.intakes[Nutrients.Water.nutrientId].value,
       },
       {
         col: 2,
         main: "Ca",
         subtext: "BONES & TEETH",
-        percent: Math.random(0, 100).toFixed(2)
+        nutrient: Nutrients.Calcium,
+        goal: this.goals[Nutrients.Calcium.nutrientId].value,
+        intake: this.intakes[Nutrients.Calcium.nutrientId].value,
       },
       {
         col: 2,
         main: "K",
         subtext: "BlOOD PRESSURE",
-        percent: Math.random(0, 100).toFixed(2)
+        nutrient: Nutrients.Potassium,
+        goal: this.goals[Nutrients.Potassium.nutrientId].value,
+        intake: this.intakes[Nutrients.Potassium.nutrientId].value,
       },
       {
         col: 2,
         main: "Fe",
         subtext: "OXYGEN",
-        percent: Math.random(0, 100).toFixed(2)
+        nutrient: Nutrients.Iron,
+        goal: this.goals[Nutrients.Iron.nutrientId].value,
+        intake: this.intakes[Nutrients.Iron.nutrientId].value,
       },
       {
         col: 2,
         main: "A",
         subtext: "SKIN",
-        percent: Math.random(0, 100).toFixed(2)
+        nutrient: Nutrients.VitaminA_RAE,
+        goal: this.goals[Nutrients.VitaminA_RAE.nutrientId].value,
+        intake: this.intakes[Nutrients.VitaminA_RAE.nutrientId].value,
       },
       {
         col: 2,
         main: "B1",
         subtext: "ENERGY",
-        percent: Math.random(0, 100).toFixed(2)
+        nutrient: Nutrients.Thiamin,
+        goal: this.goals[Nutrients.Thiamin.nutrientId].value,
+        intake: this.intakes[Nutrients.Thiamin.nutrientId].value,
       },
       {
         col: 2,
         main: "B2",
         subtext: "TISSUES",
-        percent: Math.random(0, 100).toFixed(2)
+        nutrient: Nutrients.Riboflavin,
+        goal: this.goals[Nutrients.Riboflavin.nutrientId].value,
+        intake: this.intakes[Nutrients.Riboflavin.nutrientId].value,
       },
       {
         col: 2,
         main: "B6",
         subtext: "NERVOUS/ENERGY",
-        percent: Math.random(0, 100).toFixed(2)
+        nutrient: Nutrients.VitaminB6,
+        goal: this.goals[Nutrients.VitaminB6.nutrientId].value,
+        intake: this.intakes[Nutrients.VitaminB6.nutrientId].value,
       },
       {
         col: 2,
         main: "B12",
         subtext: "NERVOUS SYSTEM",
-        percent: Math.random(0, 100).toFixed(2)
+        nutrient: Nutrients.VitaminB12,
+        goal: this.goals[Nutrients.VitaminB12.nutrientId].value,
+        intake: this.intakes[Nutrients.VitaminB12.nutrientId].value,
       },
       {
         col: 2,
         main: "C",
         subtext: "GROWTH HORMONE",
-        percent: Math.random(0, 100).toFixed(2)
+        nutrient: Nutrients.VitaminC,
+        goal: this.goals[Nutrients.VitaminC.nutrientId].value,
+        intake: this.intakes[Nutrients.VitaminC.nutrientId].value,
       },
       {
         col: 2,
         main: "D",
         subtext: "TEETH & BONES",
-        percent: Math.random(0, 100).toFixed(2)
+        nutrient: Nutrients.VitaminC,
+        goal: this.goals[Nutrients.VitaminC.nutrientId].value,
+        intake: this.intakes[Nutrients.VitaminC.nutrientId].value,
       },
       {
         col: 2,
         main: "E",
         subtext: "CELL PROTECTION",
-        percent: Math.random(0, 100).toFixed(2)
+        nutrient: Nutrients.VitaminE,
+        goal: this.goals[Nutrients.VitaminE.nutrientId].value,
+        intake: this.intakes[Nutrients.VitaminE.nutrientId].value,
       },
       {
         col: 2,
         main: "Vit K",
         subtext: "INFLAMMATION",
-        percent: Math.random(0, 100).toFixed(2)
+        nutrient: Nutrients.VitaminE,
+        goal: this.goals[Nutrients.VitaminE.nutrientId].value,
+        intake: this.intakes[Nutrients.VitaminE.nutrientId].value,
       },
       {
         col: 2,
         main: "FOLATE",
         subtext: "ABSORBTION",
-        percent: Math.random(0, 100).toFixed(2)
+        nutrient: Nutrients.Folate,
+        goal: this.goals[Nutrients.Folate.nutrientId].value,
+        intake: this.intakes[Nutrients.Folate.nutrientId].value,
       },
       {
         col: 2,
         main: "Gl",
         subtext: "ENERGY",
-        percent: Math.random(0, 100).toFixed(2)
+        nutrient: Nutrients.Folate,
+        goal: this.goals[Nutrients.Folate.nutrientId].value,
+        intake: this.intakes[Nutrients.Folate.nutrientId].value,
       },
       {
         col: 2,
         main: "Chol",
         subtext: "ABSORBTION",
-        percent: Math.random(0, 100).toFixed(2)
+        nutrient: Nutrients.Cholesterol,
+        goal: this.goals[Nutrients.Cholesterol.nutrientId].value,
+        intake: this.intakes[Nutrients.Cholesterol.nutrientId].value,
       }
     ];
 
@@ -266,60 +302,24 @@ class Dashboard extends Component {
         <Widget col={12} theme="light">
           <LongGraph {...CaloricConsumption} />
         </Widget>
-        <Widget col={2} theme="dark">
-          <CircleGraph {...CircleGraphs[2]} />
-        </Widget>
-        <Widget col={2} theme="dark">
-          <CircleGraph {...CircleGraphs[3]} />
-        </Widget>
-        <Widget col={2} theme="dark">
-          <CircleGraph {...CircleGraphs[4]} />
-        </Widget>
-        <Widget col={2} theme="dark">
-          <CircleGraph {...CircleGraphs[5]} />
-        </Widget>
-        <Widget col={2} theme="dark">
-          <CircleGraph {...CircleGraphs[6]} />
-        </Widget>
-        <Widget col={2} theme="dark">
-          <CircleGraph {...CircleGraphs[7]} />
-        </Widget>
-        <Widget col={2} theme="dark">
-          <CircleGraph {...CircleGraphs[8]} />
-        </Widget>
-        <Widget col={2} theme="dark">
-          <CircleGraph {...CircleGraphs[9]} />
-        </Widget>
-        <Widget col={2} theme="dark">
-          <CircleGraph {...CircleGraphs[10]} />
-        </Widget>
-        <Widget col={2} theme="dark">
-          <CircleGraph {...CircleGraphs[11]} />
-        </Widget>
-        <Widget col={2} theme="dark">
-          <CircleGraph {...CircleGraphs[12]} />
-        </Widget>
-        <Widget col={2} theme="dark">
-          <CircleGraph {...CircleGraphs[13]} />
-        </Widget>
-        <Widget col={2} theme="dark">
-          <CircleGraph {...CircleGraphs[14]} />
-        </Widget>
-        <Widget col={2} theme="dark">
-          <CircleGraph {...CircleGraphs[15]} />
-        </Widget>
-        <Widget col={2} theme="dark">
-          <CircleGraph {...CircleGraphs[16]} />
-        </Widget>
-        <Widget col={2} theme="dark">
-          <CircleGraph {...CircleGraphs[17]} />
-        </Widget>
-        <Widget col={2} theme="dark">
-          <CircleGraph {...CircleGraphs[18]} />
-        </Widget>
-        <Widget col={2} theme="dark">
-          <CircleGraph {...CircleGraphs[19]} />
-        </Widget>
+        <NutrientWidget col={2} theme="dark" {...CircleGraphs[2]}/>
+        <NutrientWidget col={2} theme="dark" {...CircleGraphs[3]}/>
+        <NutrientWidget col={2} theme="dark" {...CircleGraphs[4]}/>
+        <NutrientWidget col={2} theme="dark" {...CircleGraphs[5]}/>
+        <NutrientWidget col={2} theme="dark" {...CircleGraphs[6]}/>
+        <NutrientWidget col={2} theme="dark" {...CircleGraphs[7]}/>
+        <NutrientWidget col={2} theme="dark" {...CircleGraphs[8]}/>
+        <NutrientWidget col={2} theme="dark" {...CircleGraphs[9]}/>
+        <NutrientWidget col={2} theme="dark" {...CircleGraphs[10]}/>
+        <NutrientWidget col={2} theme="dark" {...CircleGraphs[11]}/>
+        <NutrientWidget col={2} theme="dark" {...CircleGraphs[12]}/>
+        <NutrientWidget col={2} theme="dark" {...CircleGraphs[13]}/>
+        <NutrientWidget col={2} theme="dark" {...CircleGraphs[14]}/>
+        <NutrientWidget col={2} theme="dark" {...CircleGraphs[15]}/>
+        <NutrientWidget col={2} theme="dark" {...CircleGraphs[16]}/>
+        <NutrientWidget col={2} theme="dark" {...CircleGraphs[17]}/>
+        <NutrientWidget col={2} theme="dark" {...CircleGraphs[18]}/>
+        <NutrientWidget col={2} theme="dark" {...CircleGraphs[19]}/>
       </div>
     );
   }
