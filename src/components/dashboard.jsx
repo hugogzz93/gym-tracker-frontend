@@ -283,12 +283,8 @@ class Dashboard extends Component {
         <Widget col={3} theme="dark">
           <LineGraph {...ContentLineGraphs[1]} />
         </Widget>
-        <Widget col={3} theme="dark">
-          <CircleGraph {...CircleGraphs[0]} />
-        </Widget>
-        <Widget col={3} theme="dark">
-          <CircleGraph {...CircleGraphs[1]} />
-        </Widget>
+        <NutrientWidget col={3} theme="dark" {...CircleGraphs[0]}/>
+        <NutrientWidget col={3} theme="dark" {...CircleGraphs[1]}/>
         <Widget col={3} theme="dark">
           <LineGraph {...ContentLineGraphs[2]} />
         </Widget>
