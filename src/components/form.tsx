@@ -68,10 +68,16 @@ function reducer(state, action) {
         )
       };
     }
-    case "updateCalorie": {
+    case "updateCalories": {
       return {
         ...state,
         calories: action.payload
+      };
+    }
+    case "updateWater": {
+      return {
+        ...state,
+        water: action.payload
       };
     }
     case "updateProtein": {
@@ -102,7 +108,7 @@ const FoodInput = (props: {
   />
 );
 
-const Form = (props: { active: boolean }) => {
+const Form = (props: { active: boolean; close: (e: object) => void }) => {
   const [state, dispatch] = useReducer(reducer, {
     selection: [],
     options: [],
@@ -117,6 +123,9 @@ const Form = (props: { active: boolean }) => {
 
   return (
     <form id="intakeForm" className={`grid-1 ${props.active ? "active" : ""}`}>
+      <div className="col-1 flex--row flex--justify-end">
+        <i className="fas fa-times" onClick={props.close} />
+      </div>
       <div className="col-1">
         <Selectize
           value={null}
@@ -178,7 +187,9 @@ const Form = (props: { active: boolean }) => {
           );
         }}
       </Mutation>
-      <div className="col-1">
+      <SessionContext.Consumer>
+      {({userId}) => (
+        <div className='col-1'>
         <Mutation mutation={ADD_NUTRIENT}>
           {(addNutrient, { loading, error }) => (
             <React.Fragment>
@@ -197,7 +208,8 @@ const Form = (props: { active: boolean }) => {
                     variables: {
                       input: {
                         nutrientId: "208",
-                        value: parseFloat(state.calories)
+                        value: parseFloat(state.calories),
+                        userId
                       }
                     }
                   });
@@ -205,6 +217,39 @@ const Form = (props: { active: boolean }) => {
               >
                 Submit
               </button>
+            </React.Fragment>
+          )}
+        </Mutation>
+        <Mutation mutation={ADD_NUTRIENT}>
+          {(addNutrient, { loading, error }) => (
+            <React.Fragment>
+              <TextInput
+                value={state.water}
+                onChange={e =>
+                  dispatch({ type: "updateWater", payload: e.target.value })
+                }
+                name="Water"
+                label="Add Water"
+              />
+              <button
+                onClick={e => {
+                  e.preventDefault();
+                  addNutrient({
+                    variables: {
+                      input: {
+                        nutrientId: "255",
+                        value: parseFloat(state.water),
+                        userId
+                      }
+                    }
+                  });
+                  dispatch({ type: "updateWater", payload: 0 });
+                }}
+              >
+                Submit
+              </button>
+              {loading && <span>Loading</span>}
+              {error && <span>Error</span>}
             </React.Fragment>
           )}
         </Mutation>
@@ -226,7 +271,8 @@ const Form = (props: { active: boolean }) => {
                     variables: {
                       input: {
                         nutrientId: "203",
-                        value: parseFloat(state.protein)
+                        value: parseFloat(state.protein),
+                        userId
                       }
                     }
                   });
@@ -240,7 +286,9 @@ const Form = (props: { active: boolean }) => {
             </React.Fragment>
           )}
         </Mutation>
-      </div>
+        </div>
+      )}
+      </SessionContext.Consumer>
     </form>
   );
 };

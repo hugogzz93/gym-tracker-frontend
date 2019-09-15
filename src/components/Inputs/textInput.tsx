@@ -8,6 +8,7 @@ export interface Props {
   className?: string;
   errors?: object;
   label?: string;
+  step?: string;
 }
 
 const Input = (props: Props) => {
@@ -24,6 +25,7 @@ const Input = (props: Props) => {
         placeholder=" "
         name={props.name}
         onChange={props.onChange}
+        step={props.step || '1'}
       />
       <label htmlFor={props.name}>{props.label}</label>
       {props.errors && (

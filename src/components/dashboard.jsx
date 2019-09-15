@@ -7,15 +7,19 @@ import Number from "./graph/Number";
 import Picture from "./graph/Picture";
 import Widget from "./graph/Widget";
 import NutrientWidget from "./NutrientWidget.tsx";
-import Nutrients from '../constants/nutrientIds'
+import Nutrients from "../constants/nutrientIds";
 
 class Dashboard extends Component {
   constructor(props) {
     super(props);
-    this.goals = {}
-    this.props.data.nutrientIntakeGoals.forEach(e => this.goals[e.nutrientId] = e)
-    this.intakes = {}
-    this.props.data.totalIntake.forEach(e => this.intakes[e.nutrientId] = e)
+    this.goals = {};
+    this.props.data.nutrientIntakeGoals.forEach(
+      e => (this.goals[e.nutrientId] = e)
+    );
+    this.intakes = {};
+    this.props.data.dailyIntake.totals.forEach(
+      e => (this.intakes[e.nutrientId] = e)
+    );
   }
 
   render() {
@@ -95,7 +99,7 @@ class Dashboard extends Component {
       }
     ];
 
-    const getValue = (intake) => intake ? intake.value : 0;
+    const getValue = intake => (intake ? intake.value : 0);
 
     const CircleGraphs = [
       {
@@ -104,7 +108,7 @@ class Dashboard extends Component {
         subtext: "",
         nutrient: Nutrients.Protein,
         goal: getValue(this.goals[Nutrients.Protein.nutrientId]),
-        intake: getValue(this.intakes[Nutrients.Protein.nutrientId]),
+        intake: getValue(this.intakes[Nutrients.Protein.nutrientId])
       },
       {
         col: 3,
@@ -112,7 +116,7 @@ class Dashboard extends Component {
         subtext: "",
         nutrient: Nutrients.Energy,
         goal: getValue(this.goals[Nutrients.Energy.nutrientId]),
-        intake: getValue(this.intakes[Nutrients.Energy.nutrientId]),
+        intake: getValue(this.intakes[Nutrients.Energy.nutrientId])
       },
       {
         col: 2,
@@ -120,7 +124,7 @@ class Dashboard extends Component {
         subtext: "STRENGHT",
         nutrient: Nutrients.Magnesium,
         goal: getValue(this.goals[Nutrients.Magnesium.nutrientId]),
-        intake: getValue(this.intakes[Nutrients.Magnesium.nutrientId]),
+        intake: getValue(this.intakes[Nutrients.Magnesium.nutrientId])
       },
       {
         col: 2,
@@ -128,7 +132,7 @@ class Dashboard extends Component {
         subtext: "MUSCLES",
         nutrient: Nutrients.Zinc,
         goal: getValue(this.goals[Nutrients.Zinc.nutrientId]),
-        intake: getValue(this.intakes[Nutrients.Zinc.nutrientId]),
+        intake: getValue(this.intakes[Nutrients.Zinc.nutrientId])
       },
       {
         col: 2,
@@ -136,7 +140,7 @@ class Dashboard extends Component {
         subtext: "GENERAL",
         nutrient: Nutrients.Water,
         goal: getValue(this.goals[Nutrients.Water.nutrientId]),
-        intake: getValue(this.intakes[Nutrients.Water.nutrientId]),
+        intake: getValue(this.intakes[Nutrients.Water.nutrientId])
       },
       {
         col: 2,
@@ -144,7 +148,7 @@ class Dashboard extends Component {
         subtext: "BONES & TEETH",
         nutrient: Nutrients.Calcium,
         goal: getValue(this.goals[Nutrients.Calcium.nutrientId]),
-        intake: getValue(this.intakes[Nutrients.Calcium.nutrientId]),
+        intake: getValue(this.intakes[Nutrients.Calcium.nutrientId])
       },
       {
         col: 2,
@@ -152,7 +156,7 @@ class Dashboard extends Component {
         subtext: "BlOOD PRESSURE",
         nutrient: Nutrients.Potassium,
         goal: getValue(this.goals[Nutrients.Potassium.nutrientId]),
-        intake: getValue(this.intakes[Nutrients.Potassium.nutrientId]),
+        intake: getValue(this.intakes[Nutrients.Potassium.nutrientId])
       },
       {
         col: 2,
@@ -160,7 +164,7 @@ class Dashboard extends Component {
         subtext: "OXYGEN",
         nutrient: Nutrients.Iron,
         goal: getValue(this.goals[Nutrients.Iron.nutrientId]),
-        intake: getValue(this.intakes[Nutrients.Iron.nutrientId]),
+        intake: getValue(this.intakes[Nutrients.Iron.nutrientId])
       },
       {
         col: 2,
@@ -168,7 +172,7 @@ class Dashboard extends Component {
         subtext: "SKIN",
         nutrient: Nutrients.VitaminA_RAE,
         goal: getValue(this.goals[Nutrients.VitaminA_RAE.nutrientId]),
-        intake: getValue(this.intakes[Nutrients.VitaminA_RAE.nutrientId]),
+        intake: getValue(this.intakes[Nutrients.VitaminA_RAE.nutrientId])
       },
       {
         col: 2,
@@ -176,7 +180,7 @@ class Dashboard extends Component {
         subtext: "ENERGY",
         nutrient: Nutrients.Thiamin,
         goal: getValue(this.goals[Nutrients.Thiamin.nutrientId]),
-        intake: getValue(this.intakes[Nutrients.Thiamin.nutrientId]),
+        intake: getValue(this.intakes[Nutrients.Thiamin.nutrientId])
       },
       {
         col: 2,
@@ -184,7 +188,7 @@ class Dashboard extends Component {
         subtext: "TISSUES",
         nutrient: Nutrients.Riboflavin,
         goal: getValue(this.goals[Nutrients.Riboflavin.nutrientId]),
-        intake: getValue(this.intakes[Nutrients.Riboflavin.nutrientId]),
+        intake: getValue(this.intakes[Nutrients.Riboflavin.nutrientId])
       },
       {
         col: 2,
@@ -192,7 +196,7 @@ class Dashboard extends Component {
         subtext: "NERVOUS/ENERGY",
         nutrient: Nutrients.VitaminB6,
         goal: getValue(this.goals[Nutrients.VitaminB6.nutrientId]),
-        intake: getValue(this.intakes[Nutrients.VitaminB6.nutrientId]),
+        intake: getValue(this.intakes[Nutrients.VitaminB6.nutrientId])
       },
       {
         col: 2,
@@ -200,7 +204,7 @@ class Dashboard extends Component {
         subtext: "NERVOUS SYSTEM",
         nutrient: Nutrients.VitaminB12,
         goal: getValue(this.goals[Nutrients.VitaminB12.nutrientId]),
-        intake: getValue(this.intakes[Nutrients.VitaminB12.nutrientId]),
+        intake: getValue(this.intakes[Nutrients.VitaminB12.nutrientId])
       },
       {
         col: 2,
@@ -208,7 +212,7 @@ class Dashboard extends Component {
         subtext: "GROWTH HORMONE",
         nutrient: Nutrients.VitaminC,
         goal: getValue(this.goals[Nutrients.VitaminC.nutrientId]),
-        intake: getValue(this.intakes[Nutrients.VitaminC.nutrientId]),
+        intake: getValue(this.intakes[Nutrients.VitaminC.nutrientId])
       },
       {
         col: 2,
@@ -216,7 +220,7 @@ class Dashboard extends Component {
         subtext: "TEETH & BONES",
         nutrient: Nutrients.VitaminC,
         goal: getValue(this.goals[Nutrients.VitaminC.nutrientId]),
-        intake: getValue(this.intakes[Nutrients.VitaminC.nutrientId]),
+        intake: getValue(this.intakes[Nutrients.VitaminC.nutrientId])
       },
       {
         col: 2,
@@ -224,15 +228,15 @@ class Dashboard extends Component {
         subtext: "CELL PROTECTION",
         nutrient: Nutrients.VitaminE,
         goal: getValue(this.goals[Nutrients.VitaminE.nutrientId]),
-        intake: getValue(this.intakes[Nutrients.VitaminE.nutrientId]),
+        intake: getValue(this.intakes[Nutrients.VitaminE.nutrientId])
       },
       {
         col: 2,
-        main: "Vit K",
+        main: "Vit K(TODO)",
         subtext: "INFLAMMATION",
         nutrient: Nutrients.VitaminE,
         goal: getValue(this.goals[Nutrients.VitaminE.nutrientId]),
-        intake: getValue(this.intakes[Nutrients.VitaminE.nutrientId]),
+        intake: getValue(this.intakes[Nutrients.VitaminE.nutrientId])
       },
       {
         col: 2,
@@ -240,7 +244,7 @@ class Dashboard extends Component {
         subtext: "ABSORBTION",
         nutrient: Nutrients.Folate,
         goal: getValue(this.goals[Nutrients.Folate.nutrientId]),
-        intake: getValue(this.intakes[Nutrients.Folate.nutrientId]),
+        intake: getValue(this.intakes[Nutrients.Folate.nutrientId])
       },
       {
         col: 2,
@@ -248,7 +252,7 @@ class Dashboard extends Component {
         subtext: "ENERGY",
         nutrient: Nutrients.Folate,
         goal: getValue(this.goals[Nutrients.Folate.nutrientId]),
-        intake: getValue(this.intakes[Nutrients.Folate.nutrientId]),
+        intake: getValue(this.intakes[Nutrients.Folate.nutrientId])
       },
       {
         col: 2,
@@ -256,7 +260,7 @@ class Dashboard extends Component {
         subtext: "ABSORBTION",
         nutrient: Nutrients.Cholesterol,
         goal: getValue(this.goals[Nutrients.Cholesterol.nutrientId]),
-        intake: getValue(this.intakes[Nutrients.Cholesterol.nutrientId]),
+        intake: getValue(this.intakes[Nutrients.Cholesterol.nutrientId])
       }
     ];
 
@@ -283,8 +287,8 @@ class Dashboard extends Component {
         <Widget col={3} theme="dark">
           <LineGraph {...ContentLineGraphs[1]} />
         </Widget>
-        <NutrientWidget col={3} theme="dark" {...CircleGraphs[0]}/>
-        <NutrientWidget col={3} theme="dark" {...CircleGraphs[1]}/>
+        <NutrientWidget col={3} theme="dark" {...CircleGraphs[0]} />
+        <NutrientWidget col={3} theme="dark" {...CircleGraphs[1]} />
         <Widget col={3} theme="dark">
           <LineGraph {...ContentLineGraphs[2]} />
         </Widget>
@@ -300,24 +304,24 @@ class Dashboard extends Component {
         <Widget col={12} theme="light">
           <LongGraph {...CaloricConsumption} />
         </Widget>
-        <NutrientWidget col={2} theme="dark" {...CircleGraphs[2]}/>
-        <NutrientWidget col={2} theme="dark" {...CircleGraphs[3]}/>
-        <NutrientWidget col={2} theme="dark" {...CircleGraphs[4]}/>
-        <NutrientWidget col={2} theme="dark" {...CircleGraphs[5]}/>
-        <NutrientWidget col={2} theme="dark" {...CircleGraphs[6]}/>
-        <NutrientWidget col={2} theme="dark" {...CircleGraphs[7]}/>
-        <NutrientWidget col={2} theme="dark" {...CircleGraphs[8]}/>
-        <NutrientWidget col={2} theme="dark" {...CircleGraphs[9]}/>
-        <NutrientWidget col={2} theme="dark" {...CircleGraphs[10]}/>
-        <NutrientWidget col={2} theme="dark" {...CircleGraphs[11]}/>
-        <NutrientWidget col={2} theme="dark" {...CircleGraphs[12]}/>
-        <NutrientWidget col={2} theme="dark" {...CircleGraphs[13]}/>
-        <NutrientWidget col={2} theme="dark" {...CircleGraphs[14]}/>
-        <NutrientWidget col={2} theme="dark" {...CircleGraphs[15]}/>
-        <NutrientWidget col={2} theme="dark" {...CircleGraphs[16]}/>
-        <NutrientWidget col={2} theme="dark" {...CircleGraphs[17]}/>
-        <NutrientWidget col={2} theme="dark" {...CircleGraphs[18]}/>
-        <NutrientWidget col={2} theme="dark" {...CircleGraphs[19]}/>
+        <NutrientWidget col={2} theme="dark" {...CircleGraphs[2]} />
+        <NutrientWidget col={2} theme="dark" {...CircleGraphs[3]} />
+        <NutrientWidget col={2} theme="dark" {...CircleGraphs[4]} />
+        <NutrientWidget col={2} theme="dark" {...CircleGraphs[5]} />
+        <NutrientWidget col={2} theme="dark" {...CircleGraphs[6]} />
+        <NutrientWidget col={2} theme="dark" {...CircleGraphs[7]} />
+        <NutrientWidget col={2} theme="dark" {...CircleGraphs[8]} />
+        <NutrientWidget col={2} theme="dark" {...CircleGraphs[9]} />
+        <NutrientWidget col={2} theme="dark" {...CircleGraphs[10]} />
+        <NutrientWidget col={2} theme="dark" {...CircleGraphs[11]} />
+        <NutrientWidget col={2} theme="dark" {...CircleGraphs[12]} />
+        <NutrientWidget col={2} theme="dark" {...CircleGraphs[13]} />
+        <NutrientWidget col={2} theme="dark" {...CircleGraphs[14]} />
+        <NutrientWidget col={2} theme="dark" {...CircleGraphs[15]} />
+        <NutrientWidget col={2} theme="dark" {...CircleGraphs[16]} />
+        <NutrientWidget col={2} theme="dark" {...CircleGraphs[17]} />
+        <NutrientWidget col={2} theme="dark" {...CircleGraphs[18]} />
+        <NutrientWidget col={2} theme="dark" {...CircleGraphs[19]} />
       </div>
     );
   }

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Mutation } from "react-apollo";
 import Widget from "./graph/Widget";
-import Input from './Inputs/textInput'
+import Input from "./Inputs/textInput";
 import gql from "graphql-tag.macro";
 import CircleGraph from "./graph/CircleGraph";
-import { ITNutrient } from '../constants/types';
+import { ITNutrient } from "../constants/types";
 
 const UPDATE_NUTRIENT_GOAL = gql`
   mutation updateNutrientGoal(
@@ -30,7 +30,7 @@ interface NutrientProps {
   intake: number;
 }
 
-const getPercent = (current , goal) => parseFloat((current / goal).toFixed(2))
+const getPercent = (current, goal) => parseFloat((current / goal).toFixed(2));
 
 const NutrientWidget = (props: NutrientProps) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -39,39 +39,57 @@ const NutrientWidget = (props: NutrientProps) => {
 
   useEffect(() => setGoal(props.goal), [props.goal]);
 
-
   if (isEditing)
     return (
-      <Widget className="nutrient-widget" col={props.col} theme={props.theme || "dark"}>
+      <Widget
+        className="nutrient-widget"
+        col={props.col}
+        theme={props.theme || "dark"}
+      >
         <div className="widget__toolbar card card--no-bg grid-4">
-          <div className="col-3"/>
-          <i className="clickable t--gray col-1 fas fa-times" onClick={() => setIsEditing(false)}></i>
+          <div className="col-3" />
+          <i
+            className="clickable t--gray col-1 fas fa-times"
+            onClick={() => setIsEditing(false)}
+          />
         </div>
-        <Mutation mutation={UPDATE_NUTRIENT_GOAL} onCompleted={ data =>  {
-          setGoal(data.nutrientIntakeGoal.update.value)
-          setIsEditing(false)
-          } }>
+        <Mutation
+          mutation={UPDATE_NUTRIENT_GOAL}
+          onCompleted={data => {
+            setGoal(data.nutrientIntakeGoal.update.value);
+            setIsEditing(false);
+          }}
+        >
           {(updateGoal, { data, loading, error }) => {
-            if(loading) <div className="t--b3">loading</div>
+            if (loading) <div className="t--b3">loading</div>;
             return (
-              <form className="flex--col flex--centered" style={{height: '60%'}}>
-                  <Input 
-                    name={`${props.nutrient.nutrientId}`}
-                    type="number"
-                    value={inputValue}
-                    label={props.nutrient.unit}
-                    onChange={e => setInputValue(parseInt(e.target.value))}
-                  />
-                <div className="button" onClick={e =>
-                  updateGoal({
-                    variables: {
-                      nutrientId: props.nutrient.nutrientId,
-                      input: {
-                        value: inputValue
+              <form
+                className="flex--col flex--centered"
+                style={{ height: "60%" }}
+              >
+                <Input
+                  name={`${props.nutrient.nutrientId}`}
+                  type="number"
+                  step='0.1'
+                  value={inputValue}
+                  label={props.nutrient.unit}
+                  onChange={e => setInputValue(parseFloat(e.target.value))}
+                />
+                <div
+                  className="button"
+                  onClick={e =>
+                    updateGoal({
+                      variables: {
+                        nutrientId: props.nutrient.nutrientId,
+                        input: {
+                          value: inputValue
+                        }
                       }
-                    }
-                  })
-                }>Update Goal</div>
+                    })
+                  }
+                >
+                  Update Goal
+                </div>
               </form>
             );
           }}
@@ -80,10 +98,17 @@ const NutrientWidget = (props: NutrientProps) => {
     );
   else
     return (
-      <Widget col={props.col} theme={props.theme || "dark"} className={'nutrient-widget'}>
+      <Widget
+        col={props.col}
+        theme={props.theme || "dark"}
+        className={"nutrient-widget"}
+      >
         <div className="widget__toolbar card card--no-bg grid-4">
-          <div className="col-3"/>
-          <i className="clickable t--gray col-1 fas fa-cog" onClick={() => setIsEditing(true)}></i>
+          <div className="col-3" />
+          <i
+            className="clickable t--gray col-1 fas fa-cog"
+            onClick={() => setIsEditing(true)}
+          />
         </div>
         <CircleGraph {...props} percent={getPercent(props.intake, goal)} />
       </Widget>
